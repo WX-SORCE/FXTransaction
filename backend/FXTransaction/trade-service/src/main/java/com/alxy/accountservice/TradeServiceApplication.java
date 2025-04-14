@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableFeignClients
 @EnableScheduling
-public class RiskServiceApplication {
+public class TradeServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(RiskServiceApplication.class, args);
+        SpringApplication.run(TradeServiceApplication.class, args);
     }
 }
