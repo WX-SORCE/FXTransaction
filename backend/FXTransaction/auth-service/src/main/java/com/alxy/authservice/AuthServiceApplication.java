@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class AuthServiceApplication {
     public static void main(String[] args) {
+        // System.setProperty("spring.profiles.active", "docker");
+        System.setProperty("spring.profiles.active", "dev");
         SpringApplication.run(AuthServiceApplication.class, args);
     }
 }

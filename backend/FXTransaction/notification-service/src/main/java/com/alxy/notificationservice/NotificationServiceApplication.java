@@ -8,6 +8,8 @@ import org.springframework.kafka.annotation.EnableKafka;
 public class NotificationServiceApplication {
 
     public static void main(String[] args) {
+        // System.setProperty("spring.profiles.active", "docker");
+        System.setProperty("spring.profiles.active", "dev");
         SpringApplication.run(NotificationServiceApplication.class, args);
     }
 }

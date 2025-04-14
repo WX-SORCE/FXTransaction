@@ -9,6 +9,8 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 @EnableEurekaServer
 public class DiscoveryServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(DiscoveryApplication.class, args);
+        // System.setProperty("spring.profiles.active", "docker");
+        System.setProperty("spring.profiles.active", "dev");
+        SpringApplication.run(DiscoveryServiceApplication.class, args);
     }
 }
