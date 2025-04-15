@@ -42,9 +42,9 @@ public class CurrencyHistory {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Column(name = "bid_price", precision = 20, scale = 8)
-    private BigDecimal bidPrice;
+    @Column(name = "market_buy", precision = 20, scale = 8)
+    private BigDecimal marketBuy;
 
-    @Column(name = "ask_price", precision = 20, scale = 8)
-    private BigDecimal askPrice;
+    @Column(name = "market_sell", precision = 20, scale = 8)
+    private BigDecimal marketSell;
 }

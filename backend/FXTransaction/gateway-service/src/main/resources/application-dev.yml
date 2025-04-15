@@ -29,6 +29,16 @@ spring:
           uri: lb://marketAnalysis-service
           predicates:
             - Path=/v1/currency/**
+        # Flask服务
+        - id: flask-service
+          uri: lb://flask-service
+          predicates:
+            - Path=/v1/flask/**
+        # account服务
+        - id: account-service
+          uri: lb://account-service
+          predicates:
+            - Path=/v1/account/**
 eureka:
   client:
     service-url:

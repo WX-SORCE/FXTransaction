@@ -1,10 +1,10 @@
 package com.alxy.marketanalysisservice.Controller;
 
-import com.alxy.accountservice.DTO.ExchangeRateView;
-import com.alxy.accountservice.DTO.Result;
-import com.alxy.accountservice.Entity.CurrencyHistory;
-import com.alxy.accountservice.Service.CurrencyExchangeScheduledTask;
-import com.alxy.accountservice.Service.CurrencyHistoryService;
+import com.alxy.marketanalysisservice.DTO.ExchangeRateView;
+import com.alxy.marketanalysisservice.DTO.Result;
+import com.alxy.marketanalysisservice.Entity.CurrencyHistory;
+import com.alxy.marketanalysisservice.Service.CurrencyExchangeScheduledTask;
+import com.alxy.marketanalysisservice.Service.CurrencyHistoryService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +27,7 @@ public class CurrencyController {
             @RequestParam String targetCurrency,
             @RequestParam String period) {
         // TODO Day
+
         try {
             List<ExchangeRateView> history = historyService.getHistory(baseCurrency, targetCurrency, period);
             return Result.success(history); // 成功返回数据
@@ -43,8 +44,8 @@ public class CurrencyController {
 
 
     @GetMapping("/currencyPairList")
-    public Result<List<CurrencyHistory>> currencyPairList(@RequestParam String baseCurrency) {
-        return Result.success(historyService.currencyPairList(baseCurrency));
+    public Result<List<CurrencyHistory>> currencyPairList() {
+        return Result.success(historyService.currencyPairList());
     }
 
     @PostMapping("/saveCurrencyOfDate")

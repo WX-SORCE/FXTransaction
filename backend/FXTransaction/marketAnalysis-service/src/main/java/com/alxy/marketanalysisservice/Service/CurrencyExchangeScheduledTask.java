@@ -1,7 +1,7 @@
 package com.alxy.marketanalysisservice.Service;
 
-import com.alxy.accountservice.Entity.CurrencyHistory;
-import com.alxy.accountservice.Repository.CurrencyHistoryRepository;
+import com.alxy.marketanalysisservice.Entity.CurrencyHistory;
+import com.alxy.marketanalysisservice.Repository.CurrencyHistoryRepository;
 import jakarta.annotation.Resource;
 import jakarta.transaction.Transactional;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -258,6 +258,8 @@ public class CurrencyExchangeScheduledTask {
                 history.setLow(exchangeRate.multiply(BigDecimal.valueOf(0.98)));
                 history.setOpen(exchangeRate);
                 history.setClose(exchangeRate);
+                history.setMarketBuy(exchangeRate.multiply(BigDecimal.valueOf(0.96)));
+                history.setMarketSell(exchangeRate.multiply(BigDecimal.valueOf(1.04)));
                 history.setDate(date);
                 repository.addCurrencyHistory(history);
             }
@@ -332,8 +334,8 @@ public class CurrencyExchangeScheduledTask {
             BigDecimal askPrice = exchangeRate.multiply(askMultiplier).setScale(8, RoundingMode.HALF_UP);
 
             // 更新实体类中的买入价和卖出价
-            history.setBidPrice(bidPrice);
-            history.setAskPrice(askPrice);
+            history.setMarketBuy(bidPrice);
+            history.setMarketSell(askPrice);
         }
 
         // 保存更新后的所有记录

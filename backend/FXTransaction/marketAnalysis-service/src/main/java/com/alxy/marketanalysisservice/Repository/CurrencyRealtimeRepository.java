@@ -1,6 +1,6 @@
 package com.alxy.marketanalysisservice.Repository;
 
-import com.alxy.accountservice.Entity.CurrencyRealtime;
+import com.alxy.marketanalysisservice.Entity.CurrencyRealtime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -11,8 +11,6 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.nio.charset.StandardCharsets;
-
 @Configuration
 @Order(-1) // 优先级高于默认异常处理器
 public class GlobalExceptionHandler implements ErrorWebExceptionHandler {

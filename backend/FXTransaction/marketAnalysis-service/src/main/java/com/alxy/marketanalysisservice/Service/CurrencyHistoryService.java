@@ -1,8 +1,8 @@
 package com.alxy.marketanalysisservice.Service;
 
-import com.alxy.accountservice.DTO.ExchangeRateView;
-import com.alxy.accountservice.Entity.CurrencyHistory;
-import com.alxy.accountservice.Repository.CurrencyHistoryRepository;
+import com.alxy.marketanalysisservice.DTO.ExchangeRateView;
+import com.alxy.marketanalysisservice.Entity.CurrencyHistory;
+import com.alxy.marketanalysisservice.Repository.CurrencyHistoryRepository;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +24,10 @@ public class CurrencyHistoryService {
             case "three_months" -> endDate.minusMonths(3);
             default -> throw new IllegalArgumentException("Invalid period specified: " + period);
         };
-        return repository.findByBaseCurrencyAndTargetCurrencyAndDateBetween(baseCurrency, targetCurrency, startDate, endDate);
+        return repository.findByBaseCurrencyAndTargetCurrencyAndDateBetweenOrderByDateAsc(baseCurrency, targetCurrency, startDate, endDate);
     }
 
-    public List<CurrencyHistory> currencyPairList(String baseCurrency) {
-        return repository.findCurrencyHistoriesByDateAndBaseCurrency(LocalDate.now(), baseCurrency);
+    public List<CurrencyHistory> currencyPairList() {
+        return repository.findCurrencyHistoriesByDate(LocalDate.now());
     }
 }
