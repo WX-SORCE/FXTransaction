@@ -10,6 +10,7 @@
     <file url="file://$PROJECT_DIR$/backend/FXTransaction/marketAnalysis-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/FXTransaction/notification-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/FXTransaction/risk-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/FXTransaction/risk-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/FXTransaction/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/FXTransaction/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/FXTransaction/trade-service/src/main/java" charset="UTF-8" />
