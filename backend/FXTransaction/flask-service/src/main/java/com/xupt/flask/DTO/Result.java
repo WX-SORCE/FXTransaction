@@ -26,7 +26,7 @@ public class Result<T> {
 
     // 成功返回 - 不带数据
     public static Result<?> success() {
-        return new Result<>(204, "操作成功", null, null);
+        return new Result<>(200, "操作成功", null, null);
     }
 
     // 失败返回 - 默认错误类型

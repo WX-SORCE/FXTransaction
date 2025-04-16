@@ -27,7 +27,7 @@ public class JWTFilter implements GlobalFilter, Ordered {
             "/v1/auth/faceLogin",
             "/v1/auth/emailLogin",
             "/v1/auth/sendValidation",
-            "/v1/account/getFaceToken",
+            "/v1/flask/getTokenByFace",
             "/v1/currency/history",
             "/v1/currency/currencyPairList"
     );

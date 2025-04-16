@@ -6,6 +6,7 @@ import com.alxy.accountservice.Entity.Account;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public interface AccountService {
@@ -23,7 +24,7 @@ public interface AccountService {
      * @param userId 用户 ID
      * @return 匹配的账户信息 Optional 对象
      */
-    Result<?> getAccountByUserId(String userId);
+    List<Account> getAccountByUserId(String userId);
 
 
     // 充值方法

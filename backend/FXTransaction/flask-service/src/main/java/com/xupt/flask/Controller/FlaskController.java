@@ -5,15 +5,13 @@ import com.xupt.flask.Service.FlaskService;
 import com.xupt.flask.Utils.JwtUtil;
 import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 @RestController
@@ -35,7 +33,7 @@ public class FlaskController {
     @PostMapping("/getTokenByFace")
     public Result<?> getTokenByFace(@RequestParam("image") MultipartFile file) throws Exception {
         String username = flaskService.Face2User(file);
-        if (username == null || username.isEmpty()) {
+        if (Objects.equals(username, "unknown") || username.isEmpty()) {
             return Result.error("人脸识别失败");
         }
         String token = createToken(username);
@@ -43,6 +41,15 @@ public class FlaskController {
         // 存入redis，5分钟过期
         redisTemplate.opsForValue().set(redisKey, token, Duration.ofMinutes(5));
         return Result.success(token);
+    }
+
+    @GetMapping("/forecast")
+    public Result<?> getForecastCurrency(@RequestParam String baseCurrency, @RequestParam String targetCurrency){
+        Result<?> result = flaskService.PredictExchange(baseCurrency, targetCurrency);
+        if (result.getCode() == 200) {
+            return Result.success(result.getData());
+        }
+        return Result.error("服务出错！");
     }
 
     // 验证token方法

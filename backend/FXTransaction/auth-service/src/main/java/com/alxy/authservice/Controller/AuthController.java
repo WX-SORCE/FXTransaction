@@ -7,6 +7,7 @@ import com.alxy.authservice.Entity.User;
 import com.alxy.authservice.Repository.UserRepository;
 import com.alxy.authservice.Service.AuthService;
 import com.alxy.authservice.utils.MailUtil;
+import com.alxy.authservice.utils.ThreadLocalUtil;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -48,6 +49,14 @@ public class AuthController {
     public Result<User> getUser(String userId) {
         User user = userRepository.findUserByUserId(userId);
         return Result.success(user);
+    }
+
+    @GetMapping("getKycStatue")
+    Result<?> getKycStatue() {
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        String userId = claims.get("userId").toString();
+        User user = userRepository.findUserByUserId(userId);
+        return Result.success(user.getKycStatus());
     }
 
     @PostMapping("/faceLogin")

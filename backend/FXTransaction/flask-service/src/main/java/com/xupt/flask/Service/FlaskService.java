@@ -37,6 +37,63 @@ public class FlaskService {
         return null;
     }
 
+
+    public Result<?> PredictExchange(String baseCurrency, String targetCurrency) {
+        String url = BASE_PATH + "/predict?base_currency=" + baseCurrency + "&target_currency=" + targetCurrency;
+        try {
+            // 构建请求头
+            HttpHeaders headers = new HttpHeaders();
+            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+            HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+
+            // 发送GET请求
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    requestEntity,
+                    String.class
+            );
+
+            // 成功响应
+            if (response.getStatusCode().is2xxSuccessful()) {
+                String decodedBody = DecodeUnicode(response.getBody());
+
+                try {
+                    // 解析响应的JSON字符串
+                    JSONObject dataJson = new JSONObject(decodedBody);
+
+                    // 提取相关字段
+                    String baseCur = dataJson.getString("base_currency");
+                    String targetCur = dataJson.getString("target_currency");
+                    double latestRate = dataJson.getDouble("latest_rate");
+                    double predictProb = dataJson.getDouble("predict_probability") * 100;
+                    String suggestAction = dataJson.getString("suggest_action");
+
+                    // 格式化输出
+                    String summaryMessage = String.format(
+                            "当前汇率：1 %s = %.6f %s，预测未来涨的概率为 %.2f%%，建议【%s】",
+                            baseCur, latestRate, targetCur, predictProb, suggestAction
+                    );
+
+                    return Result.success(summaryMessage);
+                } catch (Exception e) {
+                    // JSON解析异常，返回原始内容
+                    return Result.success(decodedBody);
+                }
+
+            } else {
+                return Result.error("预测请求失败，状态码：" + response.getStatusCodeValue());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("预测请求异常：" + e.getMessage());
+        }
+    }
+
+
+
+
     public Result<?> SendText(String url, String text) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

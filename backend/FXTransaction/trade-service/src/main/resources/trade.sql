@@ -2,7 +2,6 @@ CREATE DATABASE trade_database;
 
 USE trade_database;
 
--- 4.2 交易记录表
 CREATE TABLE transactions
 (
     transaction_id   VARCHAR(50) PRIMARY KEY COMMENT '交易ID（主键）',

@@ -5,14 +5,12 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 
-// 交换单
+// 市价单
 @Data
-public class TradeVo {
+public class TradeSettleRequest {
     private String userId;
     private String baseCurrency;
     private String targetCurrency;
-    private BigDecimal baseBalance;
-    private BigDecimal targetBalance;
-    private BigDecimal marginAmount;
-    private BigDecimal leverage;
+    private BigDecimal baseAmount;
+    private BigDecimal targetAmount;
 }

@@ -34,6 +34,7 @@ public class AuthServiceImpl implements AuthService {
     public Result<?> loginWithPassword(String username, String password) {
         User user = userRepository.findUserByUsername(username);
         boolean validPassword = Md5Util.checkPassword(password, user.getPassword());
+
         return validPassword ? getToken(user) : Result.error("密码错误");
     }
 
