@@ -39,6 +39,11 @@ spring:
           uri: lb://account-service
           predicates:
             - Path=/v1/account/**
+        # risk服务
+        - id: risk-service
+          uri: lb://risk-service
+          predicates:
+            - Path=/v1/risks/**
 eureka:
   client:
     service-url:
